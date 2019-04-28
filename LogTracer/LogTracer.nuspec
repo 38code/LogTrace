@@ -15,4 +15,8 @@
     <copyright>Copyright 2019</copyright>
     <tags>log trace</tags>
   </metadata>
+  <files>
+    <file src="*.html" exclude="LogView.html"></file>
+    <file src="*.js" exclude="LogView.js"></file>
+  </files>
 </package>
