@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace LogTracer.Test
 {
+    /// <summary>
+    /// 代码性能测试类
+    /// </summary>
     public static class CodeTimer
     {
         public static void Initialize()

@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using LogTracer.Core;
 
-namespace LogTracer.TaskJob
+namespace LogTracer.Core
 {
     /// <summary>
-    /// 单例任务
+    /// 内部定时任务
     /// </summary>
-    internal sealed class SingletonTask
+    internal sealed class BackgroundTask
     {
         /// <summary>
         /// 健康检查执行时间间隔(秒)
@@ -32,7 +31,7 @@ namespace LogTracer.TaskJob
         /// <param name="create"> 创建任务的委托 </param>
         /// <param name="logger"> 日志跟踪器 </param>
         /// <param name="checkInterval"> 健康检查间隔时间,单位秒(默认30) </param>
-        public SingletonTask(TraceSource logger, int checkInterval = 30)
+        public BackgroundTask(TraceSource logger, int checkInterval = 30)
         {
             Logger = logger;
             Logger?.Entry();
@@ -119,12 +118,12 @@ namespace LogTracer.TaskJob
                 await task;
                 if (task.Exception != null)
                 {
-                    Logger?.Error(task.Exception, nameof(SingletonTask));
+                    Logger?.Error(task.Exception, nameof(BackgroundTask));
                 }
             }
             catch (Exception ex)
             {
-                Logger?.Error(ex, nameof(SingletonTask));
+                Logger?.Error(ex, nameof(BackgroundTask));
             }
             finally
             {

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using LogTracer.LogWriter;
-using LogTracer.TaskJob;
 
 namespace LogTracer.Core
 {
@@ -72,7 +71,7 @@ namespace LogTracer.Core
         {
             Logger?.Entry();
             _writer = writer ?? throw new ArgumentNullException(nameof(writer));
-            _task = new SingletonTask(writer.Logger);
+            _task = new BackgroundTask(writer.Logger);
             _task.OnRun += WriteAsync;
             _batchMaxCount = GetNotDefault(batchMaxCount, _writer.BatchMaxCount, DefaultBatchMaxCount);
             _batchWaitMilliseconds = GetNotDefault((int)batchMaxWait.TotalMilliseconds, (int)_writer.BatchMaxWait.TotalMilliseconds, DefaultBatchWaitMilliseconds);
@@ -100,7 +99,7 @@ namespace LogTracer.Core
         /// </summary>
         public int Count => _items.Count;
 
-        private readonly SingletonTask _task;
+        private readonly BackgroundTask _task;
         /// <summary>
         /// 追加写入对象
         /// </summary>

@@ -70,8 +70,8 @@
     <Compile Include="Core\LoggerContext.cs" />
     <Compile Include="Core\LogItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskJob\ActivityTokenSource.cs" />
-    <Compile Include="TaskJob\SingletonTask.cs" />
+    <Compile Include="Core\ActivityTokenSource.cs" />
+    <Compile Include="Core\BackgroundTask.cs" />
     <Compile Include="Core\TraceSourceExtensions.cs" />
     <Compile Include="Core\WriteQueue.cs" />
     <Compile Include="LogWriter\FastFileLogWriter.cs" />

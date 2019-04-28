@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace LogTracer.TaskJob
+namespace LogTracer.Core
 {
     /// <summary>
     /// 这是一个检查任务是否处于活动状态的信号标识
