@@ -6,12 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 文件写入器
     /// </summary>
-    public class FileWriter : IWriter
+    public class FileLogWriter : ILogWriter
     {
 
         #region Private Fields

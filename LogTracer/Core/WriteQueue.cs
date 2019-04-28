@@ -3,8 +3,8 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using LogTracer.SingletonTask;
-using LogTracer.Writer;
+using LogTracer.LogWriter;
+using LogTracer.TaskJob;
 
 namespace LogTracer.Core
 {
@@ -53,7 +53,7 @@ namespace LogTracer.Core
         /// <summary>
         /// 写入器
         /// </summary>
-        private readonly IWriter _writer;
+        private readonly ILogWriter _writer;
 
         /// <summary>
         /// 最后刷新时间
@@ -68,11 +68,11 @@ namespace LogTracer.Core
         /// <param name="batchMaxWait"> </param>
         /// <param name="queueMaxCount"> </param>
         /// <exception cref="ArgumentNullException"><paramref name="writer"/> is <see langword="null" />.</exception>
-        public WriteQueue(IWriter writer, int queueMaxCount, int batchMaxCount = 0, TimeSpan batchMaxWait = default(TimeSpan))
+        public WriteQueue(ILogWriter writer, int queueMaxCount, int batchMaxCount = 0, TimeSpan batchMaxWait = default(TimeSpan))
         {
             Logger?.Entry();
             _writer = writer ?? throw new ArgumentNullException(nameof(writer));
-            _task = new SingletonTask.SingletonTask(writer.Logger);
+            _task = new SingletonTask(writer.Logger);
             _task.OnRun += WriteAsync;
             _batchMaxCount = GetNotDefault(batchMaxCount, _writer.BatchMaxCount, DefaultBatchMaxCount);
             _batchWaitMilliseconds = GetNotDefault((int)batchMaxWait.TotalMilliseconds, (int)_writer.BatchMaxWait.TotalMilliseconds, DefaultBatchWaitMilliseconds);
@@ -100,7 +100,7 @@ namespace LogTracer.Core
         /// </summary>
         public int Count => _items.Count;
 
-        private readonly SingletonTask.SingletonTask _task;
+        private readonly SingletonTask _task;
         /// <summary>
         /// 追加写入对象
         /// </summary>

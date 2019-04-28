@@ -1,6 +1,6 @@
 ﻿using System;
 using LogTracer.Core;
-using LogTracer.Writer;
+using LogTracer.LogWriter;
 
 /// <summary>
 /// 本地日志侦听器
@@ -8,7 +8,7 @@ using LogTracer.Writer;
 // ReSharper disable once CheckNamespace
 public class FileTraceListener : TraceListenerBase
 {
-    private IWriter _writer;
+    private ILogWriter _writer;
 
     /// <summary>
     /// 初始化侦听器
@@ -40,7 +40,7 @@ public class FileTraceListener : TraceListenerBase
         {
             throw new ArgumentNullException(nameof(writerType));
         }
-        Writer = (IWriter)Activator.CreateInstance(writerType);
+        Writer = (ILogWriter)Activator.CreateInstance(writerType);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class FileTraceListener : TraceListenerBase
     /// </summary>
     /// <param name="writer"></param>
     /// <exception cref="ArgumentNullException"> <paramref name="writer"/> 不能为空 </exception>
-    public FileTraceListener(IWriter writer)
+    public FileTraceListener(ILogWriter writer)
         : base(true, null)
     {
         if (writer == null)
@@ -76,7 +76,7 @@ public class FileTraceListener : TraceListenerBase
     /// <summary>
     /// 获取写入器实例
     /// </summary>
-    protected virtual IWriter Writer
+    protected virtual ILogWriter Writer
     {
         get
         {
@@ -84,14 +84,14 @@ public class FileTraceListener : TraceListenerBase
             {
                 if (InitializeData == null)
                 {
-                    Writer = new FastFileWriter();
+                    Writer = new FastFileLogWriter();
                 }
                 else
                 {
                     var type = Type.GetType(InitializeData, false, true);
                     if (type != null)
                     {
-                        Writer = (IWriter)Activator.CreateInstance(type);
+                        Writer = (ILogWriter)Activator.CreateInstance(type);
                     }
                     else
                     {

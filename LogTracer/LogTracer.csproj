@@ -70,17 +70,17 @@
     <Compile Include="Core\LoggerContext.cs" />
     <Compile Include="Core\LogItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SingletonTask\ActivityTokenSource.cs" />
-    <Compile Include="SingletonTask\SingletonTask.cs" />
+    <Compile Include="TaskJob\ActivityTokenSource.cs" />
+    <Compile Include="TaskJob\SingletonTask.cs" />
     <Compile Include="Core\TraceSourceExtensions.cs" />
     <Compile Include="Core\WriteQueue.cs" />
-    <Compile Include="Writer\FastFileWriter.cs" />
-    <Compile Include="Writer\FileWriter.cs" />
-    <Compile Include="Writer\IAppendAsync.cs" />
-    <Compile Include="Writer\IFlushAsync.cs" />
-    <Compile Include="Writer\IWriter.cs" />
-    <Compile Include="Writer\LogServiceWriter.cs" />
-    <Compile Include="Writer\SystemLogWriter.cs" />
+    <Compile Include="LogWriter\FastFileLogWriter.cs" />
+    <Compile Include="LogWriter\FileLogWriter.cs" />
+    <Compile Include="LogWriter\IAppendAsync.cs" />
+    <Compile Include="LogWriter\IFlushAsync.cs" />
+    <Compile Include="LogWriter\ILogWriter.cs" />
+    <Compile Include="LogWriter\LogServiceWriter.cs" />
+    <Compile Include="LogWriter\SystemLogWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LogView.html" />

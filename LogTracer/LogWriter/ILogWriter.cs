@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 日志写入器
     /// </summary>
-    public interface IWriter : IDisposable
+    public interface ILogWriter : IDisposable
     {
         /// <summary>
         /// 批处理最大数量

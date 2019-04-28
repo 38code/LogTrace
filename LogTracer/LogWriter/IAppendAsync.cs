@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 异步追加日志接口

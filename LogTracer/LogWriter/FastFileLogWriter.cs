@@ -6,19 +6,19 @@ using System.Linq;
 using System.Text;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 本地日志写入器
     /// </summary>
-    public sealed class FastFileWriter : FileWriter
+    public sealed class FastFileLogWriter : FileLogWriter
     {
         #region Public Properties
 
         /// <summary>
         /// 写入器名称
         /// </summary>
-        public override string Name => nameof(FastFileWriter);
+        public override string Name => nameof(FastFileLogWriter);
 
         #endregion Public Properties
 

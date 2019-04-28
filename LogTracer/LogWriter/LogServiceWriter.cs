@@ -10,12 +10,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 用于以SimpleLogService的格式写入日志到文件
     /// </summary>
-    internal sealed class LogServiceWriter : FileWriter, IFlushAsync
+    internal sealed class LogServiceWriter : FileLogWriter, IFlushAsync
     {
         #region Public Constructors
 

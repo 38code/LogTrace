@@ -3,12 +3,12 @@ using System.Diagnostics;
 using System.Threading;
 using LogTracer.Core;
 
-namespace LogTracer.Writer
+namespace LogTracer.LogWriter
 {
     /// <summary>
     /// 用于将日志内容写入系统事件
     /// </summary>
-    public sealed class SystemLogWriter : IWriter
+    public sealed class SystemLogWriter : ILogWriter
     {
         private readonly string _applicationName;
         private EventLog _logger;
@@ -43,12 +43,12 @@ namespace LogTracer.Writer
         /// <summary>
         /// 批处理最大数量
         /// </summary>
-        int IWriter.BatchMaxCount => 0;
+        int ILogWriter.BatchMaxCount => 0;
 
         /// <summary>
         /// 批处理最大等待时间
         /// </summary>
-        TimeSpan IWriter.BatchMaxWait => TimeSpan.Zero;
+        TimeSpan ILogWriter.BatchMaxWait => TimeSpan.Zero;
 
         /// <summary>
         /// 写入器名称

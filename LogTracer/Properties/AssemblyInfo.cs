@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("LogingTracer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("LogTracer")]
+[assembly: AssemblyDescription("日志跟踪工具")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LogingTracer")]
+[assembly: AssemblyCompany("GitHub")]
+[assembly: AssemblyProduct("LogTracer")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

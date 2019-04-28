@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using LogTracer.Core;
-using LogTracer.Writer;
+using LogTracer.LogWriter;
 
 /// <summary>
 /// 按照SLS的方式输出日志
@@ -50,11 +50,11 @@ public sealed class LogServiceTraceListener : FileTraceListener
         }
     }
 
-    private IWriter _writer;
+    private ILogWriter _writer;
     /// <summary>
     /// 获取写入器实例
     /// </summary>
-    protected override IWriter Writer
+    protected override ILogWriter Writer
     {
         get
         {

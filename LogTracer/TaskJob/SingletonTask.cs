@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using LogTracer.Core;
 
-namespace LogTracer.SingletonTask
+namespace LogTracer.TaskJob
 {
     /// <summary>
     /// 单例任务
