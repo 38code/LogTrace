@@ -13,5 +13,13 @@ namespace LogTrace.SampleWeb
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //错误写法
+            Trace.Warn("asdfasdf");
+            //正确的写法
+            System.Diagnostics.Trace.TraceInformation("sdddd");
+        }
     }
 }

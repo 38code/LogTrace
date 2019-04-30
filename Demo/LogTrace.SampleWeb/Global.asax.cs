@@ -16,9 +16,10 @@ namespace LogTrace.SampleWeb
         {
 
         }
-
+        
         public override void Init()
         {
+             
             BeginRequest += Global_BeginRequest;
             PreSendRequestContent += Global_PreSendRequestContent;
             base.Init();
@@ -39,10 +40,11 @@ namespace LogTrace.SampleWeb
 
         private void Global_BeginRequest(object sender, EventArgs e)
         {
+            
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
             var app = (HttpApplication)sender;
-
+            
             Trace.WriteLine(Dns.GetHostName(), "*HostName*");
             var hostAddress = string.Join(",",
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));
