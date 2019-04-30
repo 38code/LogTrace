@@ -10,12 +10,13 @@ namespace LogTrace.SampleApi.Controllers
 {
     public class DefaultController : ApiController
     {
-        public string Index() {
+        [HttpGet]
+        public IHttpActionResult Index() {
             
             Trace.TraceInformation("information text");
             Trace.TraceWarning("wanring text");
             Trace.TraceError("error text");
-            return "index result";
+            return Json("abcd");
         }
     }
 }
