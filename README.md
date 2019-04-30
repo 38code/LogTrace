@@ -2,9 +2,9 @@
 
 ## 1. 安装步骤
 
-### *命令行: nuget install logtrace*
+* 命令行: nuget install logtrace
 
-### *使用vs自带的nuget管理工具*
+* 使用vs自带的nuget管理工具
 
 ## 2. web.config 配置
 
