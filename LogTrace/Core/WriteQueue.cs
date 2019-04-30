@@ -71,14 +71,12 @@ namespace LogTracer.Core
         /// <exception cref="ArgumentNullException"><paramref name="writer"/> is <see langword="null" />.</exception>
         public WriteQueue(ILogWriter writer, int queueMaxCount, int batchMaxCount = 0, TimeSpan batchMaxWait = default(TimeSpan))
         {
-            Logger?.Entry();
             _writer = writer ?? throw new ArgumentNullException(nameof(writer));
-            _task = new BackgroundTask(writer.Logger);
+            _task = new BackgroundTask();
             _task.OnRun += WriteAsync;
             _batchMaxCount = GetNotDefault(batchMaxCount, _writer.BatchMaxCount, DefaultBatchMaxCount);
             _batchWaitMilliseconds = GetNotDefault((int)batchMaxWait.TotalMilliseconds, (int)_writer.BatchMaxWait.TotalMilliseconds, DefaultBatchWaitMilliseconds);
             _queueMaxCount = GetNotDefault(queueMaxCount, DefaultQueueMaxCount, 0);
-            Logger?.Exit();
 
         }
 
@@ -108,16 +106,12 @@ namespace LogTracer.Core
         /// <param name="item"> 文件写入任务 </param>
         public void Add(LogItem item)
         {
-            Logger?.Entry();
             if (_items.Count >= _queueMaxCount && item.IsLast == false)
             {
-                Logger?.Log(TraceEventType.Warning, "日志队列超过最大数量,日志被抛弃", "数量:" + _items.Count);
-                Logger?.Exit();
                 return;
             }
             _items.Enqueue(item);
             _task.RunIfStop();
-            Logger?.Exit();
         }
 
         /// <summary>
@@ -126,7 +120,6 @@ namespace LogTracer.Core
         /// <returns> </returns>
         private async Task WriteAsync(ActivityTokenSource tokenSource)
         {
-            Logger?.Entry();
             _lastFlushTime = DateTime.Now;
             var batch = 0; //当前批处数量
             while (true)
@@ -138,7 +131,6 @@ namespace LogTracer.Core
                 {
                     if (batch == 0)
                     {
-                        Logger?.Exit();
                         return;
                     }
                     log = default(LogItem);
@@ -151,7 +143,6 @@ namespace LogTracer.Core
                     if (runtime < _batchWaitMilliseconds)
                     {
                         Thread.Sleep(500);
-                        Logger?.Log(TraceEventType.Verbose, "Sleep(500)");
                         continue;
                     }
                 }
@@ -193,8 +184,7 @@ namespace LogTracer.Core
                         }
                     }
                     _lastFlushTime = DateTime.Now; //最后刷新时间
-                    batch = 0; //重置批数量
-                    Logger?.Log(TraceEventType.Verbose, "Flush Complete", $"LastFlushTime: {_lastFlushTime:yyyy-MM-dd HH:mm:ss}");
+                    batch = 0; //重置批数量   
                 }
             }
         }

@@ -207,14 +207,11 @@ namespace LogTracer.LogWriter
         /// <exception cref="ObjectDisposedException"> 流已关闭 </exception>
         public void ChangeFileIfFull()
         {
-            Logger?.Entry();
             if (InnerStream.Length < FileMaxSize)
             {
-                Logger?.Exit();
                 return;
             }
             SetNewWriteFile();
-            Logger?.Exit();
         }
 
         /// <summary>
@@ -349,11 +346,9 @@ namespace LogTracer.LogWriter
         /// <param name="days"> 删除几天之前的文件 </param>
         private void Delete(int days)
         {
-            Logger?.Entry();
             var root = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DirectoryPath));
             if (root.Exists == false) //如果不存在,放弃操作
             {
-                Logger?.Exit();
                 return;
             }
             var time = DateTime.Today.AddDays(-days);
@@ -365,13 +360,12 @@ namespace LogTracer.LogWriter
                     {
                         dir.Delete(true);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        Logger?.Error(ex, $"删除({dir.FullName})下文件失败");
+                       
                     }
                 }
             }
-            Logger?.Exit();
         }
 
         /// <summary>
@@ -430,10 +424,9 @@ namespace LogTracer.LogWriter
                     FilePath = file.FullName;
                     break;
                 }
-                catch (Exception ex)
+                catch
                 {
                     max++; //如果文件打开失败,忽略这个文件
-                    Logger?.Error(ex, $"文件({file.FullName})打开失败");
                 }
             }
         }

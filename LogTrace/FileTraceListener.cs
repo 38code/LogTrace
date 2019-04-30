@@ -119,7 +119,6 @@ public class FileTraceListener : TraceListenerBase
     protected sealed override WriteQueue CreateQueue()
     {
         var writer = Writer;
-        writer.Logger = InnerLogger;
         writer.Initialize(this);
         return new WriteQueue(writer, QueueMaxCount, BatchMaxCount, BatchMaxWait);
     }

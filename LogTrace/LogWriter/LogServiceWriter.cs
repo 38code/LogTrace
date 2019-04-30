@@ -101,7 +101,6 @@ namespace LogTracer.LogWriter
         /// <param name="item"> </param>
         public override void Append(LogItem item)
         {
-            Logger?.Entry();
             var key = item.LogGroupID.ToString("n"); //根据日志id从缓存中获取其他日志信息
             var list = _cache[key] as List<LogItem>;
 
@@ -109,7 +108,6 @@ namespace LogTracer.LogWriter
             {
                 if (item.IsLast)
                 {
-                    Logger?.Exit(); //如果缓存不存在,当前日志为最后一条,直接忽略
                     return;
                 }
                 list = new List<LogItem>();
@@ -143,7 +141,6 @@ namespace LogTracer.LogWriter
             {
                 list.Add(item);
             }
-            Logger?.Exit();
         }
 
         /// <summary>
@@ -165,12 +162,10 @@ namespace LogTracer.LogWriter
         /// <exception cref="NotSupportedException"> 当前流实例不支持写入。 </exception>
         public override void Flush()
         {
-            Logger?.Entry();
             while (_queue.TryDequeue(out var logs))
             {
                 if ((logs == null) || (logs.Count == 0))
                 {
-                    Logger?.Exit();
                     return;
                 }
                 var log = logs[0];
@@ -242,7 +237,6 @@ namespace LogTracer.LogWriter
                 }
             }
             base.Flush();
-            Logger?.Exit();
         }
 
         private void WriteCallStack(LogItem log)
@@ -283,9 +277,9 @@ namespace LogTracer.LogWriter
                 {
                     Flush();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    Logger?.Error(ex);
+                    
                 }
             }, token);
         }
@@ -324,13 +318,11 @@ namespace LogTracer.LogWriter
         /// <param name="arguments"> </param>
         private void RemovedCallback(CacheEntryRemovedArguments arguments)
         {
-            Logger?.Entry();
             var list = arguments?.CacheItem?.Value as List<LogItem>;
             if (list != null)
             {
                 _queue.Enqueue(list);
             }
-            Logger?.Exit();
         }
 
         /// <summary>

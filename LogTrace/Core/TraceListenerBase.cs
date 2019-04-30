@@ -52,8 +52,6 @@ namespace LogTracer.Core
             {
                 return;
             }
-
-            InnerLogger?.Entry();
             var context = new LoggerContext();
             log.Listener = this;
             log.LogGroupID = context.ContextId;
@@ -61,13 +59,11 @@ namespace LogTracer.Core
 
             if (context.IsNew)
             {
-                InnerLogger?.Log(TraceEventType.Verbose, "StartLog");
                 _queue.Add(new LogItem(0) { Listener = this, IsFirst = true, LogGroupID = context.ContextId });
             }
 
-            if (log.Content is LogItem)
+            if (log.Content is LogItem nlog)
             {
-                var nlog = (LogItem)log.Content;
                 nlog.Listener = this;
                 if (nlog.LogGroupID == Guid.Empty)
                 {
@@ -85,8 +81,6 @@ namespace LogTracer.Core
 
                 _queue.Add(log);
             }
-
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -108,11 +102,6 @@ namespace LogTracer.Core
         /// 还没有输出的缓存数量 
         /// </summary>
         public int CacheCount => _queue?.Count ?? 0;
-
-        /// <summary>
-        /// 日志记录器 
-        /// </summary>
-        public TraceSource InnerLogger { get; set; }
 
         /// <summary>
         /// 队列是否正在休息 
@@ -164,9 +153,7 @@ namespace LogTracer.Core
         public override void Close()
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             Trace.CorrelationManager.ActivityId = Guid.Empty;
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -175,29 +162,16 @@ namespace LogTracer.Core
         public override void Flush()
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
-
             try
             {
                 var context = new LoggerContext();
                 if (context.Exists)
                 {
-                    InnerLogger?.Log(TraceEventType.Verbose, "EndLog");
                     _queue.Add(new LogItem(context.MinLevel) { IsLast = true, Listener = this, LogGroupID = context.ContextId });
                 }
-                else
-                {
-                    InnerLogger?.Log(TraceEventType.Verbose, $"{nameof(LoggerContext)} is null");
-                }
-            }
-            catch (Exception ex)
-            {
-                InnerLogger.Error(ex, "Flush 发生错误");
             }
             finally
             {
-                InnerLogger?.Exit();
-                InnerLogger?.FlushAll();
                 LoggerContext.Clear();
             }
 
@@ -266,7 +240,6 @@ namespace LogTracer.Core
         protected virtual bool ShouldTrace(TraceEventCache cache, string source, TraceEventType eventType, int id,
             string formatOrMessage, object[] args, object data1, object[] data)
         {
-            InnerLogger?.Entry();
             if (Filter != null)
             {
                 return Filter.ShouldTrace(cache, source, eventType, id, formatOrMessage, args, data1, data);
@@ -277,7 +250,6 @@ namespace LogTracer.Core
                 return false;
             }
             var b = ((int)level & (int)eventType) != 0;
-            InnerLogger?.Return(b.ToString());
             return b;
         }
 
@@ -290,12 +262,10 @@ namespace LogTracer.Core
         public override void Fail(string message)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, null, TraceEventType.Error, 0, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Error) { Message = message });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -306,12 +276,10 @@ namespace LogTracer.Core
         public override void Fail(string message, string detailMessage)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, null, TraceEventType.Error, 0, message, null, detailMessage, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Error) { Message = message, Content = detailMessage });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -328,12 +296,10 @@ namespace LogTracer.Core
             object data)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
             {
                 AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Content = data }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -350,7 +316,6 @@ namespace LogTracer.Core
             params object[] data)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             object data1 = null;
             if (data?.Length == 1)
             {
@@ -361,7 +326,6 @@ namespace LogTracer.Core
             {
                 AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Content = data1 ?? data }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -378,12 +342,10 @@ namespace LogTracer.Core
             string message)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(eventCache, source, eventType, id, message, null, null, null))
             {
                 AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Message = message }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -398,12 +360,10 @@ namespace LogTracer.Core
         public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(eventCache, source, eventType, id, null, null, null, null))
             {
                 AppendToQueue(new LogItem(eventType) { Source = source, TraceEventID = id }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -421,12 +381,10 @@ namespace LogTracer.Core
             string format, params object[] args)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(eventCache, source, eventType, id, format, args, null, null))
             {
                 AppendToQueue(new LogItem(eventType) { Source = source, Message = string.Format(format, args), TraceEventID = id }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -443,12 +401,10 @@ namespace LogTracer.Core
             Guid relatedActivityId)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(eventCache, source, TraceEventType.Transfer, id, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Transfer) { TraceEventID = id, Source = source, Message = message }, eventCache);
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -458,12 +414,10 @@ namespace LogTracer.Core
         public override void Write(string message)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, null, TraceEventType.Verbose, 0, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Verbose) { Message = message });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -473,13 +427,11 @@ namespace LogTracer.Core
         public override void Write(object o)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             var eventType = o is Exception ? TraceEventType.Error : TraceEventType.Verbose;
             if (ShouldTrace(null, null, eventType, 0, null, null, o, null))
             {
                 AppendToQueue(new LogItem(eventType) { Content = o });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -490,12 +442,10 @@ namespace LogTracer.Core
         public override void Write(string message, string category)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, category, TraceEventType.Verbose, 0, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Verbose) { Category = category, Message = message });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -506,13 +456,11 @@ namespace LogTracer.Core
         public override void Write(object o, string category)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             var eventType = o is Exception ? TraceEventType.Error : TraceEventType.Verbose;
             if (ShouldTrace(null, category, eventType, 0, null, null, o, null))
             {
                 AppendToQueue(new LogItem(eventType) { Category = category, Content = o });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -522,12 +470,10 @@ namespace LogTracer.Core
         public override void WriteLine(string message)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, null, TraceEventType.Verbose, 0, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Verbose) { Message = message, NewLine = true });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -537,13 +483,11 @@ namespace LogTracer.Core
         public override void WriteLine(object o)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             var eventType = o is Exception ? TraceEventType.Error : TraceEventType.Verbose;
             if (ShouldTrace(null, null, eventType, 0, null, null, o, null))
             {
                 AppendToQueue(new LogItem(eventType) { Content = o, NewLine = true });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -554,12 +498,10 @@ namespace LogTracer.Core
         public override void WriteLine(string message, string category)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             if (ShouldTrace(null, category, TraceEventType.Verbose, 0, message, null, null, null))
             {
                 AppendToQueue(new LogItem(TraceEventType.Verbose) { Category = category, Message = message, NewLine = true });
             }
-            InnerLogger?.Exit();
         }
 
         /// <summary>
@@ -570,13 +512,11 @@ namespace LogTracer.Core
         public override void WriteLine(object o, string category)
         {
             _initialize?.Invoke();
-            InnerLogger?.Entry();
             var eventType = o is Exception ? TraceEventType.Error : TraceEventType.Verbose;
             if (ShouldTrace(null, category, eventType, 0, null, null, o, null))
             {
                 AppendToQueue(new LogItem(eventType) { Category = category, Content = o, NewLine = true });
             }
-            InnerLogger?.Exit();
         }
 
         #endregion WriteLog

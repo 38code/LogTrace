@@ -24,10 +24,6 @@ namespace LogTracer.LogWriter
         /// </summary>
         string Name { get; }
 
-        /// <summary>
-        /// 日志跟踪器
-        /// </summary>
-        TraceSource Logger { get; set; }
 
         /// <summary>
         /// 初始化写入器

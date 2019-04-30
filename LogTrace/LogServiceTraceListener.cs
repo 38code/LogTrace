@@ -15,7 +15,7 @@ public sealed class LogServiceTraceListener : FileTraceListener
     /// </summary>
     public LogServiceTraceListener()
     {
-        InnerLogger = TraceSourceExtensions.InternalTraceSource;
+        
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ public sealed class LogServiceTraceListener : FileTraceListener
     public LogServiceTraceListener(string initializeData)
         : base(initializeData)
     {
-        InnerLogger = TraceSourceExtensions.InternalTraceSource;
+       
     }
 
     /// <summary>

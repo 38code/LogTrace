@@ -12,7 +12,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>2.0.3.0</AssemblyVersion>
-    <Version>2.0.3</Version>
+    <Version>2.0.4</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">

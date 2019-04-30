@@ -22,6 +22,6 @@ public sealed class SystemLogTraceListener : TraceListenerBase
     {
         var writer = new SystemLogWriter("Logging.Tracer");
         writer.Initialize(this);
-        return new WriteQueue(writer, int.MaxValue) { Logger = InnerLogger };
+        return new WriteQueue(writer, int.MaxValue);
     }
 }
