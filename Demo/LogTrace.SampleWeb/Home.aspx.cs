@@ -16,10 +16,21 @@ namespace LogTrace.SampleWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            //错误写法
-            Trace.Warn("asdfasdf");
-            //正确的写法
-            System.Diagnostics.Trace.TraceInformation("sdddd");
+            try
+            {
+                System.Diagnostics.Trace.TraceInformation("information text");
+                System.Diagnostics.Trace.TraceWarning("wanring text");
+                System.Diagnostics.Trace.WriteLine("messsage", "your category");
+                System.Diagnostics.Trace.WriteIf(true, "whilte true");
+                System.Diagnostics.Trace.WriteLineIf(true, "message true new line");
+                //your code
+                
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.Message);
+                throw;
+            }
         }
     }
 }

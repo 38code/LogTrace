@@ -43,8 +43,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LogTrace, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\LogTrace.2.0.0\lib\net45\LogTrace.dll</HintPath>
+    <Reference Include="LogTrace, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LogTrace.2.0.3\lib\net45\LogTrace.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
@@ -85,8 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="LogView.html" />
-    <Content Include="LogView.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

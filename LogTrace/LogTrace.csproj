@@ -4,21 +4,19 @@
     <TargetFrameworks>net45;net40</TargetFrameworks>
     <DocumentationFile Condition="'$(Configuration)'=='Release'">bin\$(Configuration)\$(TargetFramework)\LogTrace.xml</DocumentationFile>
     <Description>基于微软System.Diagnostics.Trace的日志输出框架</Description>
-    <PackageLicenseUrl>https://github.com/davidmaster/LogTracer</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/davidmaster/LogTracer</PackageProjectUrl>
     <PackageIconUrl>https://github.com/davidmaster/LogTracer</PackageIconUrl>
     <RepositoryUrl>https://github.com/davidmaster/LogTracer</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.3.0</AssemblyVersion>
+    <Version>2.0.3</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.Caching" />
