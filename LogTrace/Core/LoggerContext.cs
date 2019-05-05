@@ -12,7 +12,7 @@ namespace LogTrace.Core
         /// <summary>
         /// 上下文字段
         /// </summary>
-        private const string ContextField = nameof(LogTracer) + "."+ nameof(LoggerContext);
+        private const string ContextField = nameof(LogTrace) + "."+ nameof(LoggerContext);
 
         /// <summary>
         /// 上下文中需要存储的值

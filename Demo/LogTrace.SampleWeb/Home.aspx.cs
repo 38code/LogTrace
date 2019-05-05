@@ -19,6 +19,7 @@ namespace LogTrace.SampleWeb
             try
             {
                 System.Diagnostics.Trace.TraceInformation("information text");
+                System.Diagnostics.Trace.TraceInformation("information text");
                 System.Diagnostics.Trace.TraceWarning("wanring text");
                 System.Diagnostics.Trace.WriteLine("messsage", "your category");
                 System.Diagnostics.Trace.WriteIf(true, "whilte true");

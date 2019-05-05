@@ -13,7 +13,7 @@
   <trace autoflush="false" useGlobalLock="false">
     <listeners>
       <clear />
-      <add name="logs" type="LogServiceTraceListener,LogTrace">
+      <add name="logs" type="LogServiceTraceListener,LogTrace"/>
     </listeners>
   </trace>
 </system.diagnostics>
@@ -28,6 +28,13 @@
 ### *api工程*
 
 [Global.asax.cs](https://github.com/davidmaster/LogTracer/blob/master/Demo/LogTrace.SampleApi/Global.asax.cs)
+
+## 3. 使用方法
+
+* System.Diagnostics.Trace.TraceInformation 提示信息
+* System.Diagnostics.Trace.TraceWarning 警告信息
+* System.Diagnostics.Trace.TraceError 错误信息
+* System.Diagnostics.Trace.WriteLine 调试信息
 
 ## 4.下载日志查看工具到本地
 
