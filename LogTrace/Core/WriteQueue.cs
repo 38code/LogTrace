@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using LogTracer.LogWriter;
+using LogTrace.LogWriter;
 
-namespace LogTracer.Core
+namespace LogTrace.Core
 {
     /// <summary>
     /// 写入队列

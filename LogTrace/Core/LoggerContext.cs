@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
-using System.Threading;
 
-namespace LogTracer.Core
+namespace LogTrace.Core
 {
     /// <summary>
     /// 日志上下文

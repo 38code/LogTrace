@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Text;
 
-namespace LogTracer.Core
+namespace LogTrace.Core
 {
     /// <summary>
     /// 日志项

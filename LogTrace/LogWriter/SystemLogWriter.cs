@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using LogTracer.Core;
+using LogTrace.Core;
 
-namespace LogTracer.LogWriter
+namespace LogTrace.LogWriter
 {
     /// <summary>
     /// 用于将日志内容写入系统事件

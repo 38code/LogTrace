@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace LogTracer.LogWriter
+namespace LogTrace.LogWriter
 {
     /// <summary>
     /// 异步刷新日志接口

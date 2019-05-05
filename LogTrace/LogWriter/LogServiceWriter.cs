@@ -8,9 +8,9 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using LogTracer.Core;
+using LogTrace.Core;
 
-namespace LogTracer.LogWriter
+namespace LogTrace.LogWriter
 {
     /// <summary>
     /// 用于以SimpleLogService的格式写入日志到文件

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace LogTracer.Core
+namespace LogTrace.Core
 {
     /// <summary>
     /// 监听器基础抽象类 

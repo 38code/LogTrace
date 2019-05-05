@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LogTracer.Core
+namespace LogTrace.Core
 {
     /// <summary>
     /// 内部定时任务

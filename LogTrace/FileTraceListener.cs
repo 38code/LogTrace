@@ -1,6 +1,6 @@
 ﻿using System;
-using LogTracer.Core;
-using LogTracer.LogWriter;
+using LogTrace.Core;
+using LogTrace.LogWriter;
 
 /// <summary>
 /// 本地日志侦听器

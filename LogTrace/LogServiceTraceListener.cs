@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using LogTracer.Core;
-using LogTracer.LogWriter;
+using LogTrace.LogWriter;
 
 /// <summary>
 /// 按照SLS的方式输出日志

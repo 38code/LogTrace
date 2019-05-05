@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using LogTracer.Core;
+using LogTrace.Core;
 
-namespace LogTracer.LogWriter
+namespace LogTrace.LogWriter
 {
     /// <summary>
     /// 日志写入器

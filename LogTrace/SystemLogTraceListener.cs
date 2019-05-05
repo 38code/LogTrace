@@ -1,5 +1,5 @@
-﻿using LogTracer.Core;
-using LogTracer.LogWriter;
+﻿using LogTrace.Core;
+using LogTrace.LogWriter;
 
 /// <summary>
 /// 将日志写入系统事件的侦听器
