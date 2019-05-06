@@ -19,10 +19,16 @@ namespace LogTrace.SampleApi
         {
             BeginRequest += Global_BeginRequest;
             EndRequest += Global_EndRequest;
+            Error += Global_Error;
             base.Init();
         }
 
         #region 日志请求记录
+        private void Global_Error(object sender, EventArgs e)
+        {
+            var app = (HttpApplication)sender;
+            Trace.TraceError(app.Context.Error?.InnerException?.Message);
+        }
         private void Global_EndRequest(object sender, EventArgs e)
         {
             _stopwatch.Stop();

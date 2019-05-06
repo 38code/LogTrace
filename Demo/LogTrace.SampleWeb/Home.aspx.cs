@@ -18,19 +18,14 @@ namespace LogTrace.SampleWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            try
-            {
+            
                 System.Diagnostics.Trace.WriteLine("messsage", "your category");
                 System.Diagnostics.Trace.WriteIf(true, "whilte true");
                 System.Diagnostics.Trace.WriteLineIf(true, "message true new line");
+                int a = Convert.ToInt32("asdf");
                 //your code
-                
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Trace.TraceError(ex.Message);
-                throw;
-            }
+
+
         }
     }
 }

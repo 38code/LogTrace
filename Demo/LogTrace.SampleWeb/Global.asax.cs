@@ -23,7 +23,14 @@ namespace LogTrace.SampleWeb
              
             BeginRequest += Global_BeginRequest;
             EndRequest += Global_EndRequest;
+            Error += Global_Error;
             base.Init();
+        }
+
+        private void Global_Error(object sender, EventArgs e)
+        {
+            var app = (HttpApplication)sender;
+            Trace.TraceError(app.Context.Error?.InnerException?.Message);
         }
 
         private void Global_EndRequest(object sender, EventArgs e)
