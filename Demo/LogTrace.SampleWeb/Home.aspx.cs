@@ -11,16 +11,15 @@ namespace LogTrace.SampleWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Trace.WriteLine("messsage", "your category");
+            System.Diagnostics.Trace.WriteIf(true, "whilte true");
+            System.Diagnostics.Trace.WriteLineIf(true, "message true new line");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                System.Diagnostics.Trace.TraceInformation("information text");
-                System.Diagnostics.Trace.TraceInformation("information text");
-                System.Diagnostics.Trace.TraceWarning("wanring text");
                 System.Diagnostics.Trace.WriteLine("messsage", "your category");
                 System.Diagnostics.Trace.WriteIf(true, "whilte true");
                 System.Diagnostics.Trace.WriteLineIf(true, "message true new line");

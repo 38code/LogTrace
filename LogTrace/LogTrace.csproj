@@ -11,8 +11,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>2.0.3.0</AssemblyVersion>
-    <Version>2.0.4</Version>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <Version>2.0.7</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
@@ -24,9 +24,5 @@
   <ItemGroup>
     <None Remove="LogView.html" />
     <None Remove="LogView.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LogView.html" />
-    <Content Include="LogView.js" />
   </ItemGroup>
 </Project>

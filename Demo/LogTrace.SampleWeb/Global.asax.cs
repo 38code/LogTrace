@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
@@ -24,12 +25,13 @@ namespace LogTrace.SampleWeb
             PreSendRequestContent += Global_PreSendRequestContent;
             base.Init();
         }
-        private Stopwatch _stopwatch;
+        [ThreadStatic]
+        private static Stopwatch _stopwatch;
         private void Global_PreSendRequestContent(object sender, EventArgs e)
         {
             _stopwatch.Stop();
             double timing = _stopwatch.Elapsed.TotalMilliseconds;
-            if (timing > 500)
+            if (timing > 2000)
             {
                 Trace.TraceWarning("API用时过长");
             }
@@ -54,8 +56,6 @@ namespace LogTrace.SampleWeb
             Trace.WriteLine(app.Context.Request.ContentType, "ContentType");
             Trace.WriteLine(app.Context.Request.UrlReferrer?.AbsoluteUri, "UrlReferrer");
             Trace.WriteLine(app.Context.Request.UserAgent, "UserAgent");
-
-
         }
     }
 }

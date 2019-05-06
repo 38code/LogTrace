@@ -29,13 +29,17 @@
 
 [Global.asax.cs](https://github.com/davidmaster/LogTracer/blob/master/Demo/LogTrace.SampleApi/Global.asax.cs)
 
-## 3. 使用方法
+## 4. 使用方法
 
 * System.Diagnostics.Trace.TraceInformation 提示信息
 * System.Diagnostics.Trace.TraceWarning 警告信息
 * System.Diagnostics.Trace.TraceError 错误信息
 * System.Diagnostics.Trace.WriteLine 调试信息
 
-## 4.下载日志查看工具到本地
+### *例如我想打印每个方法的执行时间*
+
+* System.Diagnostics.Trace.WriteLine(1000,"方法名称")
+
+## 5.下载日志查看工具到本地
 
 [日志查看工具](https://logcdn.oss-cn-hangzhou.aliyuncs.com/LogView.html)
