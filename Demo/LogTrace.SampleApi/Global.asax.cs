@@ -31,8 +31,8 @@ namespace LogTrace.SampleApi
         }
         private void Global_EndRequest(object sender, EventArgs e)
         {
-            _stopwatch.Stop();
-            double timing = _stopwatch.Elapsed.TotalMilliseconds;
+            _stopwatch?.Stop();
+            double timing = _stopwatch?.Elapsed.TotalMilliseconds ?? 0;
             if (timing > 2000)
             {
                 Trace.TraceWarning("API用时过长");
@@ -41,8 +41,9 @@ namespace LogTrace.SampleApi
             Trace.WriteLine("Request End", "LogTrace");
             Trace.Flush();
         }
-       
-        private Stopwatch _stopwatch;
+
+        [ThreadStatic]
+        private static Stopwatch _stopwatch;
         private void Global_BeginRequest(object sender, EventArgs e)
         {
             _stopwatch = new Stopwatch();

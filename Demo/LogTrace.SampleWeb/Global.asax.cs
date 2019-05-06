@@ -35,8 +35,8 @@ namespace LogTrace.SampleWeb
 
         private void Global_EndRequest(object sender, EventArgs e)
         {
-            _stopwatch.Stop();
-            double timing = _stopwatch.Elapsed.TotalMilliseconds;
+            _stopwatch?.Stop();
+            double timing = _stopwatch?.Elapsed.TotalMilliseconds??0;
             if (timing > 2000)
             {
                 Trace.TraceWarning("API用时过长");
