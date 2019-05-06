@@ -22,12 +22,11 @@ namespace LogTrace.SampleWeb
         {
              
             BeginRequest += Global_BeginRequest;
-            PreSendRequestContent += Global_PreSendRequestContent;
+            EndRequest += Global_EndRequest;
             base.Init();
         }
-        [ThreadStatic]
-        private static Stopwatch _stopwatch;
-        private void Global_PreSendRequestContent(object sender, EventArgs e)
+
+        private void Global_EndRequest(object sender, EventArgs e)
         {
             _stopwatch.Stop();
             double timing = _stopwatch.Elapsed.TotalMilliseconds;
@@ -36,9 +35,12 @@ namespace LogTrace.SampleWeb
                 Trace.TraceWarning("API用时过长");
             }
             Trace.WriteLine(timing + " ms", "WebApi Timing");
-            Trace.WriteLine("Request End", "WebApi Log");
+            Trace.WriteLine("Request End", "LogTrace");
             Trace.Flush();
         }
+
+        [ThreadStatic]
+        private static Stopwatch _stopwatch;
 
         private void Global_BeginRequest(object sender, EventArgs e)
         {
@@ -46,7 +48,7 @@ namespace LogTrace.SampleWeb
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
             var app = (HttpApplication)sender;
-            
+            Trace.WriteLine("Begin Request", "LogTrace");
             Trace.WriteLine(Dns.GetHostName(), "*HostName*");
             var hostAddress = string.Join(",",
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));

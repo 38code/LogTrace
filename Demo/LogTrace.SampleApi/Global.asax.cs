@@ -18,31 +18,31 @@ namespace LogTrace.SampleApi
         public override void Init()
         {
             BeginRequest += Global_BeginRequest;
-            PreSendRequestContent += Global_PreSendRequestContent;
+            EndRequest += Global_EndRequest;
             base.Init();
         }
 
         #region 日志请求记录
-
-        private void Global_PreSendRequestContent(object sender, EventArgs e)
+        private void Global_EndRequest(object sender, EventArgs e)
         {
             _stopwatch.Stop();
             double timing = _stopwatch.Elapsed.TotalMilliseconds;
-            if (timing > 500)
+            if (timing > 2000)
             {
                 Trace.TraceWarning("API用时过长");
             }
             Trace.WriteLine(timing + " ms", "WebApi Timing");
-            Trace.WriteLine("Request End", "WebApi Log");
+            Trace.WriteLine("Request End", "LogTrace");
             Trace.Flush();
         }
+       
         private Stopwatch _stopwatch;
         private void Global_BeginRequest(object sender, EventArgs e)
         {
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
             var app = (HttpApplication)sender;
-
+            Trace.WriteLine("Begin Request", "LogTrace");
             Trace.WriteLine(Dns.GetHostName(), "*HostName*");
             var hostAddress = string.Join(",",
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));
