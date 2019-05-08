@@ -17,18 +17,17 @@ namespace LogTrace.SampleApi
         }
         public override void Init()
         {
+
             BeginRequest += Global_BeginRequest;
             EndRequest += Global_EndRequest;
-            Error += Global_Error;
+            Error += (s, e) => {
+                Trace.WriteLine(HttpContext.Current?.Error, "HttpUnhandledException");
+                Trace.WriteLine(HttpContext.Current?.Error?.InnerException, "InnerException");
+            };
+            AcquireRequestState += (s, e) => { Trace.WriteLine(HttpContext.Current?.Session?.SessionID, "SessionID"); };
             base.Init();
         }
 
-        #region 日志请求记录
-        private void Global_Error(object sender, EventArgs e)
-        {
-            var app = (HttpApplication)sender;
-            Trace.TraceError(app.Context.Error?.InnerException?.Message);
-        }
         private void Global_EndRequest(object sender, EventArgs e)
         {
             _stopwatch?.Stop();
@@ -44,29 +43,22 @@ namespace LogTrace.SampleApi
 
         [ThreadStatic]
         private static Stopwatch _stopwatch;
+
         private void Global_BeginRequest(object sender, EventArgs e)
         {
+
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
-            var app = (HttpApplication)sender;
             Trace.WriteLine("Begin Request", "LogTrace");
-            Trace.WriteLine(Dns.GetHostName(), "*HostName*");
+            Trace.WriteLine(Dns.GetHostName(), "HostName");
             var hostAddress = string.Join(",",
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));
             Trace.WriteLine(hostAddress, "HostAddresses");
             Trace.WriteLine(hostAddress, "RealIP");
-            Trace.WriteLine(app.Context.Request.Url.ToString(), "*Url*");
-            //var contentType =app.Context.Request.RequestContext.HttpContext..ContentType.Content?.Headers?.ContentType?.MediaType ?? "";
-            Trace.WriteLine(app.Context.Request.ContentType, "ContentType");
-            Trace.WriteLine(app.Context.Request.UrlReferrer?.AbsoluteUri, "UrlReferrer");
-            Trace.WriteLine(app.Context.Request.UserAgent, "UserAgent");
-
-
-
-
-
+            Trace.WriteLine(HttpContext.Current?.Request.Url.ToString(), "*Url*");
+            Trace.WriteLine(HttpContext.Current?.Request.ContentType, "ContentType");
+            Trace.WriteLine(HttpContext.Current?.Request.UrlReferrer?.AbsoluteUri, "UrlReferrer");
+            Trace.WriteLine(HttpContext.Current?.Request.UserAgent, "UserAgent");
         }
-
-        #endregion
     }
 }
