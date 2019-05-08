@@ -43,3 +43,13 @@
 ## 5.下载日志查看工具到本地
 
 [日志查看工具](https://logcdn.oss-cn-hangzhou.aliyuncs.com/LogView.html)
+
+## 6. 关于阿里云采集配置
+
+阿里云内网，同一区域直接安装LogTail组件
+
+其他云厂商或者自建IDC，需要到目录C:\LogtailData\users创建UID文件
+
+[阿里云LogTail部署文档](https://help.aliyun.com/document_detail/49006.html?spm=a2c4g.11186623.6.601.22272f6aX5lhvB)
+
+[UID文件创建文档](https://help.aliyun.com/document_detail/49007.html?spm=a2c4g.11186623.2.20.6b715332tVE8tR)
