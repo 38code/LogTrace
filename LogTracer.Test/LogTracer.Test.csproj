@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeTimer.cs" />
+    <Compile Include="InternalTask.cs" />
     <Compile Include="PerformanceTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
