@@ -50,10 +50,10 @@ namespace LogTrace.SampleApi
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
             Trace.WriteLine("Begin Request", "LogTrace");
-            Trace.WriteLine(Dns.GetHostName(), "HostName");
+            Trace.WriteLine(Dns.GetHostName(), "*HostName*");
             var hostAddress = string.Join(",",
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));
-            Trace.WriteLine(hostAddress, "HostAddresses");
+            Trace.WriteLine(hostAddress, "*HostAddresses*");
             Trace.WriteLine(hostAddress, "RealIP");
             var logUid = HttpContext.Current.Request.Cookies["log-uid"]?.Value;
             if (string.IsNullOrEmpty(logUid))
@@ -61,7 +61,7 @@ namespace LogTrace.SampleApi
                 logUid = Guid.NewGuid().ToString("N");
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("log-uid", logUid));
             }
-            Trace.WriteLine(logUid, "*LogUid*");
+            Trace.WriteLine(logUid, "LogUid");
             Trace.WriteLine(HttpContext.Current?.Request.Url.ToString(), "*Url*");
             Trace.WriteLine(HttpContext.Current?.Request.ContentType, "ContentType");
             Trace.WriteLine(HttpContext.Current?.Request.UrlReferrer?.AbsoluteUri, "UrlReferrer");
