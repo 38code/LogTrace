@@ -215,15 +215,19 @@ namespace LogTrace.LogWriter
                     base.Append(Utf8Bytes.Newline);
                 }
                 AppendComma();
-                //追加索引
+                //追加Category索引
                 for (int i = 1, length = logs.Count; i < length; i++)
                 {
                     log = logs[i];
                     var message = log.Message;
-                    if (string.IsNullOrWhiteSpace(message))
+                    if (string.IsNullOrWhiteSpace(message) || string.IsNullOrEmpty(log.Category)
+                        ||string.IsNullOrWhiteSpace(log.Category))
                     {
                         continue;
                     }
+                    var categoryBytes = Encoding.UTF8.GetBytes(log.Category.Replace("*",""));
+                    Append(categoryBytes);
+                    Append(Utf8Bytes.Comma);
                     var bytes = Encoding.UTF8.GetBytes(message);
                     for (int j = 0, l = bytes.Length; j < l; j++)
                     {
@@ -233,7 +237,7 @@ namespace LogTrace.LogWriter
                         }
                     }
                     Append(bytes);
-                    AppendWhiteSpace();
+                    Append(Utf8Bytes.Newline);
                 }
             }
             base.Flush();

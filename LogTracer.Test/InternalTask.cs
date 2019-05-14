@@ -17,8 +17,7 @@ namespace LogTracer.Test
 
         public void Run(CancellationTokenSource source)
         {
-            slim.Wait()
-            Task.Invoke(source);
+            
         }
     }
 }

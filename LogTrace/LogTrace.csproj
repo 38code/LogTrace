@@ -5,14 +5,14 @@
     <DocumentationFile Condition="'$(Configuration)'=='Release'">bin\$(Configuration)\$(TargetFramework)\LogTrace.xml</DocumentationFile>
     <Description>基于微软System.Diagnostics.Trace的日志输出框架</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/davidmaster/LogTracer</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/davidmaster/LogTracer</PackageIconUrl>
-    <RepositoryUrl>https://github.com/davidmaster/LogTracer</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/chihuobaba/LogTrace</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/chihuobaba/LogTrace</PackageIconUrl>
+    <RepositoryUrl>https://github.com/chihuobaba/LogTrace</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <Version>2.0.7</Version>
+    <Version>2.0.8</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
