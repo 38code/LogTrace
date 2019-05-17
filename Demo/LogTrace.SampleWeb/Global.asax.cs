@@ -25,8 +25,8 @@ namespace LogTrace.SampleWeb
             EndRequest += Global_EndRequest;
             Error += (s, e) =>
             {
-                Trace.WriteLine(HttpContext.Current?.Error, "HttpUnhandledException");
-                Trace.WriteLine(HttpContext.Current?.Error?.InnerException, "InnerException");
+                Trace.WriteLine(HttpContext.Current.Error, "HttpUnhandledException");
+                Trace.WriteLine(HttpContext.Current.Error.InnerException, "InnerException");
                 
             };
             AcquireRequestState += (s, e) => { Trace.WriteLine(HttpContext.Current?.Session?.SessionID, "SessionID"); };
@@ -35,8 +35,13 @@ namespace LogTrace.SampleWeb
 
         private void Global_EndRequest(object sender, EventArgs e)
         {
-            _stopwatch?.Stop();
-            double timing = _stopwatch?.Elapsed.TotalMilliseconds??0;
+            double timing = 0;
+            if (_stopwatch != null&&_stopwatch.IsRunning)
+            {
+                _stopwatch.Stop();
+                timing = _stopwatch.Elapsed.TotalMilliseconds;
+            }
+
             if (timing > 2000)
             {
                 Trace.TraceWarning("API用时过长");
