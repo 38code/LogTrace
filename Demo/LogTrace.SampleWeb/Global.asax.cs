@@ -64,17 +64,17 @@ namespace LogTrace.SampleWeb
                 Dns.GetHostAddresses(Dns.GetHostName()).Select(it => it.ToString()).Where(it => it.Contains(".")));
             Trace.WriteLine(hostAddress, "*HostAddresses*");
             Trace.WriteLine(hostAddress, "RealIP");
-            var logUid = HttpContext.Current.Request.Cookies["log-uid"]?.Value;
-            if (string.IsNullOrEmpty(logUid))
+            var uidCookie = HttpContext.Current.Request.Cookies["log-uid"];
+            if (uidCookie==null ||string.IsNullOrEmpty(uidCookie.Value))
             {
-                logUid = Guid.NewGuid().ToString("N");
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie("log-uid",logUid));
+                uidCookie = new HttpCookie("log-uid", Guid.NewGuid().ToString("N")) ;
+                HttpContext.Current.Response.Cookies.Add(uidCookie);
             }
-            Trace.WriteLine(logUid,"LogUid");
-            Trace.WriteLine(HttpContext.Current?.Request.Url.ToString(), "*Url*");
-            Trace.WriteLine(HttpContext.Current?.Request.ContentType, "ContentType");
-            Trace.WriteLine(HttpContext.Current?.Request.UrlReferrer?.AbsoluteUri, "UrlReferrer");
-            Trace.WriteLine(HttpContext.Current?.Request.UserAgent, "UserAgent");
+            Trace.WriteLine(uidCookie.Value, "LogUid");
+            Trace.WriteLine(HttpContext.Current.Request.Url.ToString(), "*Url*");
+            Trace.WriteLine(HttpContext.Current.Request.ContentType, "ContentType");
+            Trace.WriteLine(HttpContext.Current.Request.UrlReferrer==null?"": HttpContext.Current.Request.UrlReferrer.AbsoluteUri, "UrlReferrer");
+            Trace.WriteLine(HttpContext.Current.Request.UserAgent, "UserAgent");
         }
     }
 }
