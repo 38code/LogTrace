@@ -29,7 +29,6 @@ namespace LogTrace.SampleWeb
                 Trace.WriteLine(HttpContext.Current.Error.InnerException, "InnerException");
                 
             };
-            AcquireRequestState += (s, e) => { Trace.WriteLine(HttpContext.Current?.Session?.SessionID, "SessionID"); };
             base.Init();
         }
 
