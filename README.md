@@ -21,13 +21,7 @@
 
 ## 3. Global.asax文件配置
 
-### *web工程*
-
-[Global.asax.cs](https://github.com/davidmaster/LogTracer/blob/master/Demo/LogTrace.SampleWeb/Global.asax.cs)
-
-### *api工程*
-
-[Global.asax.cs](https://github.com/davidmaster/LogTracer/blob/master/Demo/LogTrace.SampleApi/Global.asax.cs)
+### 新版本不需要配置，已移除
 
 ## 4. 使用方法
 
