@@ -5,24 +5,21 @@
     <DocumentationFile Condition="'$(Configuration)'=='Release'">bin\$(Configuration)\$(TargetFramework)\LogTrace.xml</DocumentationFile>
     <Description>基于微软System.Diagnostics.Trace的日志输出框架</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/chihuobaba/LogTrace</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/chihuobaba/LogTrace</PackageIconUrl>
-    <RepositoryUrl>https://github.com/chihuobaba/LogTrace</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/storypeng/LogTrace</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/storypeng/LogTrace</PackageIconUrl>
+    <RepositoryUrl>https://github.com/storypeng/LogTrace</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <Version>2.0.8</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>3.0.2</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright></Copyright>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.Caching" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="LogView.html" />
-    <None Remove="LogView.js" />
   </ItemGroup>
 </Project>

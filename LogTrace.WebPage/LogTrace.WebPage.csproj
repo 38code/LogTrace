@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;net40</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>LogTrace的WebApplication扩展实现，通过动态注入HttpModule，实现无需更改Global文件</Description>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/storypeng/LogTrace</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/storypeng/LogTrace</PackageIconUrl>
+    <RepositoryUrl>https://github.com/storypeng/LogTrace</RepositoryUrl>
+    <Copyright></Copyright>
+    <Version>1.0.2</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogTrace\LogTrace.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+</Project>
