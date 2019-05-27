@@ -12,7 +12,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <Version>3.0.2</Version>
+    <Version>3.5.2</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright></Copyright>
   </PropertyGroup>

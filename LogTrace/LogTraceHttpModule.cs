@@ -16,7 +16,11 @@ namespace LogTrace
         /// <summary>
         /// 
         /// </summary>
-        /// <see cref="http://somenewkid.blogspot.com/2006/03/trouble-with-modules.html"/>
+        /// <remarks>
+        ///http://somenewkid.blogspot.com/2006/03/trouble-with-modules.html
+        /// Application_PreSendRequestContent 会执行两次
+        /// 暂时通过Context.Items标志位解决
+        /// </remarks>
         /// <param name="app"></param>
         public void Init(HttpApplication app)
         {
