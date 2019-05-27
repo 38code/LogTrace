@@ -1,4 +1,4 @@
-# LogTrace 安装步骤
+﻿# LogTrace 安装步骤
 
 ## 1. 安装步骤
 
@@ -19,7 +19,7 @@
 </system.diagnostics>
 ```
 
-## 3. Global.asax文件配置
+## 3. Global.asax文件配置 
 
 ### 新版本不需要配置，已移除
 
