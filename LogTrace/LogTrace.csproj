@@ -20,6 +20,12 @@
     <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Web.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

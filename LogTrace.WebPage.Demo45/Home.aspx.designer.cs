@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace LogTrace.SampleWeb {
+namespace LogTrace.WebPage.Demo45 {
     
     
     public partial class Home {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="LogTrace.SampleWeb.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="LogTrace.WebPage.Demo45.Home" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="Button1" OnClick="Button1_Click" runat="server" Text="Button" />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         </div>
     </form>
 </body>

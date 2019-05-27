@@ -33,7 +33,7 @@ namespace LogTrace.Core
         /// <summary>
         /// 日志组id
         /// </summary>
-        public Guid LogGroupID { get; internal set; }
+        public Guid LogGroupId { get; internal set; }
 
         /// <summary>
         /// 日志等级
@@ -63,7 +63,7 @@ namespace LogTrace.Core
                     ?? (_content as IConvertible)?.ToString(null)
                     ?? (_content as IFormattable)?.ToString(null, null);
             }
-            set { _message = value; }
+            set => _message = value;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace LogTrace.Core
                 }
                 return _content;
             }
-            set { _content = value; }
+            set => _content = value;
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace LogTrace.Core
         /// <summary>
         /// 事件的数值标识符
         /// </summary>
-        public int TraceEventID { get; set; }
+        public int TraceEventId { get; set; }
 
         /// <summary>
         /// 是否需要产生一个新行
@@ -162,16 +162,16 @@ namespace LogTrace.Core
                 _Buffer.AppendLine(Time.ToString("yyyy-MM-dd HH:mm:ss"));
                 _Buffer.Append("Level:");
                 _Buffer.AppendLine(Enum.GetName(typeof(TraceEventType),Level));
-                if (LogGroupID != Guid.Empty)
+                if (LogGroupId != Guid.Empty)
                 {
                     _Buffer.Append("LogGroupID:");
-                    _Buffer.Append(LogGroupID);
+                    _Buffer.Append(LogGroupId);
                     _Buffer.AppendLine();
                 }
-                if (TraceEventID != 0)
+                if (TraceEventId != 0)
                 {
                     _Buffer.Append("TraceEventID:");
-                    _Buffer.Append(TraceEventID);
+                    _Buffer.Append(TraceEventId);
                     _Buffer.AppendLine();
                 }
                 if (Category != null)

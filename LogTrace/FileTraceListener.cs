@@ -40,7 +40,7 @@ public class FileTraceListener : TraceListenerBase
         {
             throw new ArgumentNullException(nameof(writerType));
         }
-        Writer = (ILogWriter)Activator.CreateInstance(writerType);
+        _writer = (ILogWriter)Activator.CreateInstance(writerType);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public class FileTraceListener : TraceListenerBase
         {
             throw new ArgumentNullException(nameof(writer));
         }
-        Writer = writer;
+        _writer = writer;
     }
 
     /// <summary>
@@ -101,15 +101,7 @@ public class FileTraceListener : TraceListenerBase
             }
             return _writer;
         }
-        set
-        {
-
-            if (value == null)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), "value不能为null");
-            }
-            _writer = value;
-        }
+        set => _writer = value ?? throw new ArgumentOutOfRangeException(nameof(value), "value不能为null");
     }
 
     /// <summary>

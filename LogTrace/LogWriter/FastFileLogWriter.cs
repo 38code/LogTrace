@@ -91,13 +91,13 @@ namespace LogTrace.LogWriter
 
             Wirte(Fields.Time, item.Time.ToString("yyyy-MM-dd HH:mm:ss"));
             Wirte(Fields.Level, Enum.GetName(typeof(TraceEventType),item.Level));
-            if (item.LogGroupID != Guid.Empty)
+            if (item.LogGroupId != Guid.Empty)
             {
-                Wirte(Fields.LogGroupID, item.LogGroupID.ToString());
+                Wirte(Fields.LogGroupID, item.LogGroupId.ToString());
             }
-            if (item.TraceEventID != 0)
+            if (item.TraceEventId != 0)
             {
-                Wirte(Fields.TraceEventID, item.TraceEventID.ToString());
+                Wirte(Fields.TraceEventID, item.TraceEventId.ToString());
             }
             if (item.Category != null)
             {

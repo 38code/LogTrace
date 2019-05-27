@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列特性集
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("LogTrace.SampleApi")]
+[assembly: AssemblyTitle("LogTrace.WebApi.Demo45")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LogTrace.SampleApi")]
+[assembly: AssemblyProduct("LogTrace.WebApi.Demo45")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("e8c35903-1073-4661-aad1-90aed5246549")]
+[assembly: Guid("08078bff-feeb-405f-a1e3-da85dc22db67")]
 
 // 程序集的版本信息由下列四个值组成:
 //

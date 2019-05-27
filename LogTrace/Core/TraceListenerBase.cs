@@ -54,20 +54,20 @@ namespace LogTrace.Core
             }
             var context = new LoggerContext();
             log.Listener = this;
-            log.LogGroupID = context.ContextId;
+            log.LogGroupId = context.ContextId;
             context.MinLevel = log.Level;
 
             if (context.IsNew)
             {
-                _queue.Add(new LogItem(0) { Listener = this, IsFirst = true, LogGroupID = context.ContextId });
+                _queue.Add(new LogItem(0) { Listener = this, IsFirst = true, LogGroupId = context.ContextId });
             }
 
             if (log.Content is LogItem nlog)
             {
                 nlog.Listener = this;
-                if (nlog.LogGroupID == Guid.Empty)
+                if (nlog.LogGroupId == Guid.Empty)
                 {
-                    nlog.LogGroupID = log.LogGroupID;
+                    nlog.LogGroupId = log.LogGroupId;
                 }
                 context.MinLevel = nlog.Level;
                 _queue.Add(nlog);
@@ -162,12 +162,13 @@ namespace LogTrace.Core
         public override void Flush()
         {
             _initialize?.Invoke();
+           
             try
             {
                 var context = new LoggerContext();
                 if (context.Exists)
                 {
-                    _queue.Add(new LogItem(context.MinLevel) { IsLast = true, Listener = this, LogGroupID = context.ContextId });
+                    _queue.Add(new LogItem(context.MinLevel) { IsLast = true, Listener = this, LogGroupId = context.ContextId });
                 }
             }
             finally
@@ -298,7 +299,7 @@ namespace LogTrace.Core
             _initialize?.Invoke();
             if (ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
             {
-                AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Content = data }, eventCache);
+                AppendToQueue(new LogItem(eventType) { TraceEventId = id, Source = source, Content = data }, eventCache);
             }
         }
 
@@ -324,7 +325,7 @@ namespace LogTrace.Core
             }
             if (ShouldTrace(eventCache, source, eventType, id, null, null, data1, data))
             {
-                AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Content = data1 ?? data }, eventCache);
+                AppendToQueue(new LogItem(eventType) { TraceEventId = id, Source = source, Content = data1 ?? data }, eventCache);
             }
         }
 
@@ -344,7 +345,7 @@ namespace LogTrace.Core
             _initialize?.Invoke();
             if (ShouldTrace(eventCache, source, eventType, id, message, null, null, null))
             {
-                AppendToQueue(new LogItem(eventType) { TraceEventID = id, Source = source, Message = message }, eventCache);
+                AppendToQueue(new LogItem(eventType) { TraceEventId = id, Source = source, Message = message }, eventCache);
             }
         }
 
@@ -362,7 +363,7 @@ namespace LogTrace.Core
             _initialize?.Invoke();
             if (ShouldTrace(eventCache, source, eventType, id, null, null, null, null))
             {
-                AppendToQueue(new LogItem(eventType) { Source = source, TraceEventID = id }, eventCache);
+                AppendToQueue(new LogItem(eventType) { Source = source, TraceEventId = id }, eventCache);
             }
         }
 
@@ -383,7 +384,7 @@ namespace LogTrace.Core
             _initialize?.Invoke();
             if (ShouldTrace(eventCache, source, eventType, id, format, args, null, null))
             {
-                AppendToQueue(new LogItem(eventType) { Source = source, Message = string.Format(format, args), TraceEventID = id }, eventCache);
+                AppendToQueue(new LogItem(eventType) { Source = source, Message = string.Format(format, args), TraceEventId = id }, eventCache);
             }
         }
 
@@ -403,7 +404,7 @@ namespace LogTrace.Core
             _initialize?.Invoke();
             if (ShouldTrace(eventCache, source, TraceEventType.Transfer, id, message, null, null, null))
             {
-                AppendToQueue(new LogItem(TraceEventType.Transfer) { TraceEventID = id, Source = source, Message = message }, eventCache);
+                AppendToQueue(new LogItem(TraceEventType.Transfer) { TraceEventId = id, Source = source, Message = message }, eventCache);
             }
         }
 

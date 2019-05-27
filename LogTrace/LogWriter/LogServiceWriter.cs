@@ -101,7 +101,7 @@ namespace LogTrace.LogWriter
         /// <param name="item"> </param>
         public override void Append(LogItem item)
         {
-            var key = item.LogGroupID.ToString("n"); //根据日志id从缓存中获取其他日志信息
+            var key = item.LogGroupId.ToString("n"); //根据日志id从缓存中获取其他日志信息
             var list = _cache[key] as List<LogItem>;
 
             if (list == null)
@@ -178,7 +178,7 @@ namespace LogTrace.LogWriter
                 AppendLine();
                 Append(log.Time.ToString("yyyy-MM-dd HH:mm:ss"));
                 AppendComma();
-                Append(log.LogGroupID.ToString("n"));
+                Append(log.LogGroupId.ToString("n"));
                 AppendComma();
                 WriteLevel(log.Level);
                 AppendComma();

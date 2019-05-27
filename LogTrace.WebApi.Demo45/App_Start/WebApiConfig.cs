@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace LogTrace.SampleApi
+namespace LogTrace.WebApi.Demo45
 {
     public static class WebApiConfig
     {
@@ -17,7 +17,7 @@ namespace LogTrace.SampleApi
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional , controller = "default",action="" }
+                defaults: new { controller = "default", id = RouteParameter.Optional }
             );
         }
     }

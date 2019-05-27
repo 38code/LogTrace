@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
-
+using System.Threading.Tasks;
 namespace LogTrace.Core
 {
     /// <summary>
@@ -23,7 +23,6 @@ namespace LogTrace.Core
         private Guid _contextId;
         private bool _isNew;
         private bool _isInitialized;
-
         /// <summary>
         /// 初始化
         /// </summary>
@@ -31,7 +30,7 @@ namespace LogTrace.Core
         {
             if (_isInitialized == false)
             {
-                _values = (object[]) CallContext.GetData(ContextField);
+                _values = (object[]) CallContext.LogicalGetData(ContextField);
                 if (_values != null)
                 {
                     _contextId = (Guid) _values[0];
@@ -48,7 +47,7 @@ namespace LogTrace.Core
                         Trace.CorrelationManager.ActivityId = _contextId = Guid.NewGuid();
                     }
                     _values = new object[] { _contextId, _minLevel };
-                    CallContext.SetData(ContextField, _values);
+                    CallContext.LogicalSetData(ContextField, _values);
                 }
                 else
                 {

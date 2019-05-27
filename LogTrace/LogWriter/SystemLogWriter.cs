@@ -81,7 +81,7 @@ namespace LogTrace.LogWriter
             {
                 return;
             }
-            _logger.WriteEntry(item.ToString(), GetEntryType(item.Level), item.TraceEventID, (short) item.Level);
+            _logger.WriteEntry(item.ToString(), GetEntryType(item.Level), item.TraceEventId, (short) item.Level);
         }
 
 
