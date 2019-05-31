@@ -44,7 +44,8 @@ namespace LogTrace
             if (stopwatch == null) return;
             stopwatch.Stop();
             ctx.Items["TRACE_STOPWATCH"] = null;
-            Trace.WriteLine(stopwatch.Elapsed.TotalMilliseconds + " ms", "WebApi Timing");
+            Trace.TraceWarning(stopwatch.Elapsed.TotalMilliseconds + " ms", "WebApi Timing");
+            Trace.WriteLine(stopwatch.Elapsed.TotalMilliseconds + " ms", "*WebApi Timing*");
             Trace.WriteLine("Request End", "LogEnd");
             Trace.Flush();
         }
